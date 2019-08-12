@@ -30,7 +30,7 @@ A sample model is provided in the repo to serving.
 ### Serving side
 
 - Use the example fedora 28 based Dockerfile to create a container image, which installs tensorflow_model_server rpm and serves the provided valid model.<br>
-  `podman build --build-arg RPM=tensorflow-model-server-rpm/tensorflow-model-serving-1.14-1.0-1.x86_64.rpm -t tensoflow-serving -f Dockerfile .`
+  `podman build --build-arg RPM=tensorflow-model-server-rpm/tensorflow-model-serving-1.14-1.0-1.x86_64.rpm -t tensorflow-serving -f Dockerfile .`
 
   - Build arguments:
 
@@ -44,4 +44,5 @@ A sample model is provided in the repo to serving.
 - The example client side will using the tensorflow serving api to request the served model.
 - Example client side [code](./client.py) and [tensorflow_serving_api](./tensorflow_serving_api-1.14.0-py2.py3-none-any.whl) for installation are provided in the repo.
 - The following code could be used to request the model.<br>
-  `pipenv install sample_wheels/tensorflow_serving_api-1.14.0-py2.py3-none-any.whl` `pipenv run python3 client.py`
+  `pipenv install sample_wheels/tensorflow_serving_api-1.14.0-py2.py3-none-any.whl`<br>
+  `pipenv run python3 client.py`
