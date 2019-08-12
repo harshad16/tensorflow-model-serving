@@ -1,0 +1,18 @@
+[[source]]
+url ="https://tensorflow.pypi.thoth-station.ninja/index/manylinux2010/jemalloc/simple/"
+verify_ssl = true
+name = "redhat-aicoe-experiments"
+
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[requires]
+python_version = "3.6"
+
+[packages]
+tensorflow = {version="==1.14.1", index="redhat-aicoe-experiments"}
+
+[pipenv]
+allow_prereleases = true
