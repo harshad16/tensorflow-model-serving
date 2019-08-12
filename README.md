@@ -1,4 +1,4 @@
-# Tensorflow-model-server-RPM
+# Tensorflow-Model-Serving
 
 A Sample Example of Tensorflow model serving via centos6 based TensorFlow Model Server RPM and interact with it using TensorFlow Serving API.
 
