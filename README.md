@@ -25,12 +25,12 @@ A sample model is provided in the repo to serving.
   ### Serving side
 
 - Use the example fedora 28 based Dockerfile to create a container image, which installs tensorflow_model_server rpm and serves the provided valid model.<br>
-  `podman build --build-arg WHL=tensorflow-1.14.1-cp36-cp36m-linux_x86_64.whl --build-arg RPM=tensorflow-model-serving-1.14-1.0-1.x86_64.rpm -t tensoflow-serving -f Dockerfile .`
+  `podman build --build-arg WHL=sample_wheels/tensorflow-1.14.1-cp36-cp36m-linux_x86_64.whl --build-arg RPM=tensorflow-model-server-rpm/tensorflow-model-serving-1.14-1.0-1.x86_64.rpm -t tensoflow-serving -f Dockerfile .`
 
   - Build arguments:
 
     - WHL: Path of the Tensorflow wheel file.(Found at: [AICoE Index](https://tensorflow.pypi.thoth-station.ninja))
-    - RPM: Path of the Tensorflow Model Server RPM.(Found at: )
+    - RPM: Path of the Tensorflow Model Server RPM.(Found at:[TensorFlow Model Server RPM](./tensorflow-model-server-rpm/))
 
 - Run the container for serving the model via using tensorflow model server rpm. `podman run -p 9000:80 -it localhost/tensorflow-serving`
 
