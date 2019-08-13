@@ -1,0 +1,31 @@
+FROM openshift/base-centos7
+
+ENV PYTHON_VERSION=3.6 \
+    PATH=$HOME/.local/bin/:$PATH \
+    PYTHONUNBUFFERED=1 \
+    PYTHONIOENCODING=UTF-8 \
+    LC_ALL=en_US.UTF-8 \
+    LANG=en_US.UTF-8 \
+    PIP_NO_CACHE_DIR=off \
+    RPM=$RPM
+
+WORKDIR /home/user
+
+COPY Pipfile /home/user/
+COPY $RPM /home/user/
+COPY tf_model.py /home/user/
+
+RUN yum install -y $RPM
+
+RUN yum install -y centos-release-scl-rh \
+  && yum install -y scl-utils rh-python36 rh-python36-python-devel rh-python36-python-setuptools rh-python36-python-pip
+
+RUN source scl_source enable rh-python36 \
+ && python --version \
+ && pip3.6 install pipenv \
+ && pipenv install --python 3.6 \
+ && pipenv run python tf_model.py \
+ && yum -y clean all --enablerepo='*'
+
+# tensorflow model would be served via container port 80
+CMD ["tensorflow_model_server","--model_base_path=/home/user/","--port=80"]

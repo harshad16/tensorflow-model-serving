@@ -1,0 +1,23 @@
+FROM fedora:29
+ENV LANG en_US.UTF-8
+ENV RPM $RPM
+ENV PYTHON_VERSION 3.6
+
+WORKDIR /home/user
+
+COPY Pipfile /home/user/
+COPY $RPM /home/user/
+COPY tf_model.py /home/user/
+
+RUN yum install -y $RPM which
+
+RUN yum install -y python36 python3-devel python3-pip \
+  && curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" \
+  && python3.6 get-pip.py \
+  && yum -y install python-pip && yum clean all \
+  && pip3.6 install pipenv \
+  && pipenv install --python 3.6 \
+  && pipenv run python tf_model.py
+
+# tensorflow model would be served via container port 80
+CMD ["tensorflow_model_server","--model_base_path=/home/user/","--port=80"]
