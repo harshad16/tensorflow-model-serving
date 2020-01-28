@@ -12,7 +12,7 @@ name = "pypi"
 python_version = "3.6"
 
 [packages]
-tensorflow = {version="==1.14.1", index="redhat-aicoe-experiments"}
+tensorflow = {version="==1.15.2", index="redhat-aicoe-experiments"}
 
 [pipenv]
 allow_prereleases = true
